@@ -10,6 +10,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import os
 import pathlib
+
 from app import app
 
 # get relative data folder
