@@ -6,3 +6,49 @@
 .nav-pills .nav-link {
     color: #fff;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15rem;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.center2 {
+    display: block;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5.5rem;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.HEADER_STYLE {
+    color : white;
+    margin: 4px auto;
+    text-align: center
+}
+
+.HEADER_C_STYLE {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10rem;
+    color:white;
+    padding: 1rem 1rem;
+    background-color: #20B2AA;
+    text-align: center;
+}
+
+.CONTENT_STYLE {
+    margin-top: 9rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    padding: 2rem 1rem;
+}

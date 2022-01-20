@@ -27,7 +27,7 @@ df0 = pd.read_csv("../datasets/students.csv")
 df = pd.read_csv("../datasets/final_tweets.csv")
 
 layout = html.Div([
-    html.H1('Introduction',
+    html.H1('Overview',
             style={'textAlign':'center'}),
     html.Hr(),
     dbc.Card(

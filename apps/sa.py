@@ -69,6 +69,34 @@ data_ts = pd.crosstab(df['year_month'],df['sentiment'])\
 data_ts = data_ts.add_prefix('sentiment_').reset_index().rename_axis(None, axis=1) 
 # fig = px.bar(data_ts, x="month_year", y=["sentiment_0","sentiment_1"], barmode="group")
 
+# Word Cloud
+wc_before = html.Div([
+    html.P(
+        children="Word Cloud of Tweets before COVID-19 Pandemic",
+        style={'textAlign': 'center'},
+        className="lead"
+    ),
+    html.Iframe(src=app.get_asset_url("word-cloud-2019.png"),className="center2 mb-3")
+])
+
+wc_during = html.Div([
+    html.P(
+        children="Word Cloud of Tweets during COVID-19 Pandemic",
+        style={'textAlign': 'center'},
+        className="lead"
+    ),
+    html.Iframe(src=app.get_asset_url("word-cloud-2020.png"),className="center2")
+])
+
+wc_all = html.Div([
+    html.P(
+        children="Word Cloud of Tweets",
+        style={'textAlign': 'center'},
+        className="lead"
+    ),
+    html.Iframe(src=app.get_asset_url("word-cloud-all.png"),className="center2")
+])
+
 # Layout
 layout = html.Div([
     html.H2('Changes In Sentiment Before and During the Pandemic',
@@ -79,14 +107,6 @@ layout = html.Div([
         className="lead",style={'textAlign':'center'}
     ),
     html.Br(),
-    
-#     dcc.RadioItems(
-#         id='xaxis_year',
-#         options=[{'label': i, 'value': i} for i in ['All', 2019, 2020,2021]],
-#         value='All',
-#         labelStyle={'display': 'inline-block', 'padding-left':'1rem'},
-#         style={'width': '48%', 'float': 'center', 'display': 'inline-block'}
-#     ),
     dbc.Card(
         dcc.Markdown('''
         #### Time Series Analysis
@@ -125,6 +145,16 @@ layout = html.Div([
         ),
         body=True, color="success", outline=True,className="mb-3"
     ),
+    dbc.Card(
+        dcc.Markdown('''
+        #### Word Cloud
+
+        The Word Cloud below show the most common words in the different sentiment Tweets of different periods. 
+        '''
+        ),
+        body=True, color="success", outline=True,className="mb-3"
+    ),
+    wc_all
   
 ])
 

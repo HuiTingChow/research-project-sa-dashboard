@@ -25,7 +25,14 @@ df = pd.read_csv("../datasets/final_tweets.csv")
 df['new_tweet_text'] = df['new_tweet_text'].astype(str)
 
 # Load LDA
-lda_node = html.Iframe(src=app.get_asset_url("ldavis_prepared_4.html"),
+lda_node_during = html.Iframe(src=app.get_asset_url("ldavis_prepared_4.html"),
+    style=dict(position="absolute", 
+                # margin= "5rem 2rem 0rem 18rem",
+                # padding= "2rem 1rem",
+                width="100%", 
+                height="100%"))
+
+lda_node_before = html.Iframe(src=app.get_asset_url("ldavis_prepared_19_4.html"),
     style=dict(position="absolute", 
                 # margin= "5rem 2rem 0rem 18rem",
                 # padding= "2rem 1rem",
@@ -61,13 +68,22 @@ layout = html.Div([
         ),
         body=True, color="success", outline=True,className="mb-3"
     ),
-    lda_node
+    dcc.RadioItems(
+        id='period',
+        options=[{'label': i, 'value': i} for i in ['Before','During']],
+        value='During',
+        labelStyle={'display': 'inline-block', 'padding-left':'1rem'},
+        style={'width': '48%', 'float': 'center', 'display': 'inline-block'}
+    ),
+    html.Div(id="lda")
     
 
 ])
 
 
-# @app.callback(
-#     Output("page-content", "children"),
-#     [Input("url", "pathname")]
-# )
+@app.callback(Output("lda", "children"),Input("period", "value"))
+def update_graph(period):
+    if period == 'Before':
+        return lda_node_before
+    else:
+        return lda_node_during 
