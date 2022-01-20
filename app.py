@@ -17,11 +17,17 @@ import pathlib
 
 # import sys
 # sys.path.insert(0, '/apps/')
-
-app = dash.Dash(__name__, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
+external_stylesheets = [
+    {
+        "href": "https://fonts.googleapis.com/css2?"
+                "family=Lato:wght@400;700&display=swap",
+        "rel": "stylesheet",
+    },dbc.themes.BOOTSTRAP
+]
+app = dash.Dash(__name__, suppress_callback_exceptions=True, external_stylesheets=external_stylesheets)
 server = app.server
 
-from apps import introduction,eda
+from apps import introduction,eda,sa,lda
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
@@ -30,74 +36,124 @@ os.chdir(dname)
 height_top = "4rem"
 
 # styling the sidebar
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": height_top,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
+# SIDEBAR_STYLE = {
+#     "position": "fixed",
+#     "top": height_top,
+#     "left": 0,
+#     "bottom": 0,
+#     "width": "16rem",
+#     "padding": "2rem 1rem",
+#     "background-color": "#f8f9fa",
+# }
+
+# NAVBAR_STYLE = {
+#     "position": "fixed",
+#     "top": 0,
+#     "left": 0,
+#     "right": 0,
+#     "height": height_top,
+#     "background-color": "white",
+# }
+
+HEADER_STYLE = {
+    "color": "white",
+    "margin": "4px auto",
+    "text-align": "center",
+    # "max-width": "384px",
 }
 
-NAVBAR_STYLE = {
-    "position": "fixed",
+HEADER_C_STYLE = {
+    "position": "absolute",
     "top": 0,
     "left": 0,
     "right": 0,
-    "height": height_top,
-    "background-color": "white",
+    "height": "10rem",
+    "color":"white",
+    "background-color": "#800000",
+    "text-align": "center",
 }
 
-# padding for the page content
 CONTENT_STYLE = {
-    "margin-top": "5rem",
-    "margin-left": "18rem",
-    "margin-right": "2rem",
+    "margin-top": "9rem",
+    "margin-left": "5rem",
+    "margin-right": "5rem",
     "padding": "2rem 1rem",
 }
 
-navbar = dbc.NavbarSimple(
-    # children=[
-    #     dbc.NavItem(dbc.NavLink("SENTIMENT ANALYSIS: MALAYSIAN MENTAL HEALTH DURING PANDEMIC", 
-    #                                 active=True, href="/")),
-    # ],
-    brand=["SENTIMENT ANALYSIS: MALAYSIAN MENTAL HEALTH DURING PANDEMIC",],
-    brand_href="/",
-    color="dark",
-    dark=True,
-    sticky="top",
-    style=NAVBAR_STYLE,
-)
+# navbar = dbc.NavbarSimple(
+#     # children=[
+#     #     dbc.NavItem(dbc.NavLink("SENTIMENT ANALYSIS: MALAYSIAN MENTAL HEALTH DURING PANDEMIC", 
+#     #                                 active=True, href="/")),
+#     # ],
+#     brand=["SENTIMENT ANALYSIS: MALAYSIAN MENTAL HEALTH DURING PANDEMIC",],
+#     brand_href="/",
+#     color="dark",
+#     dark=True,
+#     sticky="top",
+#     style=NAVBAR_STYLE,
+# )
 
-sidebar = html.Div(
+# sidebar = html.Div(
+#     [
+#         html.P("Content"),
+#         html.Hr(),
+#         # html.P(
+#         #     "Number of students per education level", className="lead"
+#         # ),
+#         dbc.Nav(
+#             [
+#                 dbc.NavLink("Introduction", href="/", active="exact",style={'backgroundColor':'black'}),
+#                 dbc.NavLink("Exploratory Data Analysis", href="/eda", active="exact"),
+#                 dbc.NavLink("Methodology", href="/methodology", active="exact"),
+#                 dbc.NavLink("Models Evaluation", href="/models-evaluation", active="exact"),
+#                 dbc.NavLink("Sentiment Analysis", href="/sentiment-analysis", active="exact"),
+#                 dbc.NavLink("LDA Topic Model", href="/lda", active="exact"),
+#             ],
+#             vertical=True,
+#             pills=True
+#         ),
+#     ],
+#     style=SIDEBAR_STYLE,
+# )
+
+header_node = html.Div(
     [
-        html.P("Content"),
-        html.Hr(),
+        html.Br(),
+        html.H2(children="SENTIMENT ANALYSIS: MALAYSIAN MENTAL HEALTH DURING PANDEMIC",
+                style=HEADER_STYLE),
+        # html.H1(
+        #     children="Avocado Analytics" ,
+        #     style=HEADER_STYLE ),
         # html.P(
-        #     "Number of students per education level", className="lead"
+        #     children="Sentiment analysis Malaysian Tweets before and during the COVID-19 pandemic"
+        #     " using Machine Learning Models"
+        #     " to study changes in Malaysian mental health status.",
+        #     style=HEADER_STYLE,
         # ),
+        html.Br(),
         dbc.Nav(
             [
                 dbc.NavLink("Introduction", href="/", active="exact"),
+                dbc.NavLink("Methodology", href="/methodology", active="exact"),
                 dbc.NavLink("Exploratory Data Analysis", href="/eda", active="exact"),
                 dbc.NavLink("Models Evaluation", href="/models-evaluation", active="exact"),
                 dbc.NavLink("Sentiment Analysis", href="/sentiment-analysis", active="exact"),
-                dbc.NavLink("LDA Topics", href="/lda", active="exact"),
+                dbc.NavLink("LDA Topic Model", href="/lda", active="exact"),
             ],
-            vertical=True,
-            pills=True,
+            pills=True, fill=True
         ),
     ],
-    style=SIDEBAR_STYLE,
+    style=HEADER_C_STYLE
 )
+    
 
 content = html.Div(id="page-content", children=[], style=CONTENT_STYLE)
 
 app.layout = html.Div([
     dcc.Location(id="url"),
-    navbar,
-    sidebar,
+    header_node,
+    # navbar,
+    # sidebar,
     content
 ])
 
@@ -111,14 +167,10 @@ def render_page_content(pathname):
         return introduction.layout
     elif pathname == "/eda":
         return eda.layout
-    elif pathname == "/page-1":
-        return [
-                html.H1('Grad School in Iran',
-                        style={'textAlign':'center'}),
-                # dcc.Graph(id='bargraph',
-                #          figure=px.bar(df0, barmode='group', x='Years',
-                #          y=['Girls Grade School', 'Boys Grade School']))
-                ]
+    elif pathname == "/sentiment-analysis":
+        return sa.layout
+    elif pathname == "/lda":
+        return lda.layout
     elif pathname == "/page-2":
         return [
                 html.H1('High School in Iran',
@@ -140,3 +192,9 @@ def render_page_content(pathname):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
+# Code reference
+# https://github.com/Coding-with-Adam/Dash-by-Plotly/blob/master/Bootstrap/Side-Bar/side_bar.py
+# https://realpython.com/python-dash/#style-your-dash-application
+# https://community.plotly.com/t/holy-grail-layout-with-dash-bootstrap-components/40818/2

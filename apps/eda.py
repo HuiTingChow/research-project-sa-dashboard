@@ -73,37 +73,50 @@ df_freq = pd.DataFrame(
 
 # Layout
 layout = html.Div([
-    html.H1('EXPLORATORY DATA ANALYSIS',
+    html.H1('Exploratory Data Analysis',
             style={'textAlign':'center'}),
     html.Hr(),
-    dcc.Markdown('''
-    #### Dataset
-
-    Total 2377 Random Malaysian English Tweets posted on Twitter.com from 2019 to 2021 
-    which contain any one of the identified keywords were collected. The table below shows 
-    the summary of the cleaned dataset. The cleaning process included handle missing value, 
-    normalise string & date to suitable format, and remove duplicated rows. Attributes such 
-    as user id, user profile link, Tweet link that were not related to this were not collected. 
-
-    There were 700 Tweets annotated with sentiment mannually for training classification models.
-    After determinded the best model, used the model to classify the remain Tweets. 
-
-    List of identifies keyword: depress, failure, hopeless, nervous, restless, tired, 
-    worthless, annoy, guilt, bad, cut,fat, shame, scare, panic
-    '''
+        html.P(
+        children="This section analysis and explore the cleaned dataset.",
+        style={'textAlign': 'center'},
+        className="lead"
     ),
+    dbc.Card(
+        dcc.Markdown('''
+        #### Dataset
+
+        Total 2377 Random Malaysian English Tweets posted on Twitter.com from 2019 to 2021 
+        which contain any one of the identified keywords were collected. The table below shows 
+        the summary of the cleaned dataset. The cleaning process included handle missing value, 
+        normalise string & date to suitable format, and remove duplicated rows. Attributes such 
+        as user id, user profile link, Tweet link that were not related to this were not collected. 
+
+        There were 700 Tweets annotated with sentiment mannually for training classification models.
+        After determinded the best model, used the model to classify the remain Tweets. 
+
+        List of identifies keyword: depress, failure, hopeless, nervous, restless, tired, 
+        worthless, annoy, guilt, bad, cut,fat, shame, scare, panic
+        '''
+        ),
+        body=True, color="success", outline=True,className="mb-3"
+    ),
+    
     table,
     html.Br(),
-    dcc.Markdown('''
-    #### 20 Most Frequent Words
+    dbc.Card(
+        dcc.Markdown('''
+        #### 20 Most Frequent Words
 
-    The figure below shows the distribution of frequent words in the raw dataset. 
-    From the figure can observe that majority of the words which appeared most frequently 
-    were common words and did not add much information to the text. These common words 
-    were removed in the Text Pre-process stage to reduce the training time of the model
-    and to increase the accuracy of the model.
-    '''
+        The figure below shows the distribution of frequent words in the raw dataset. 
+        From the figure can observe that majority of the words which appeared most frequently 
+        were common words and did not add much information to the text. These common words 
+        were removed in the Text Pre-process stage to reduce the training time of the model
+        and to increase the accuracy of the model.
+        '''
+        ),
+        body=True, color="success", outline=True,className="mb-3"
     ),
+    
     dcc.Graph(id='bargraph',
             figure=px.bar(df_freq, barmode='group', x="word", y="count"))
 ])

@@ -27,30 +27,28 @@ df0 = pd.read_csv("../datasets/students.csv")
 df = pd.read_csv("../datasets/final_tweets.csv")
 
 layout = html.Div([
-    html.H1('INTRODUCTION',
+    html.H1('Introduction',
             style={'textAlign':'center'}),
     html.Hr(),
-    html.P(
-        children="Analyze the behavior of avocado prices"
-        " and the number of avocados sold in the US"
-        " between 2015 and 2018",
-        className="lead"
-    ),
-    dcc.Markdown('''
-    #### Dash and Markdown
+    dbc.Card(
+        dcc.Markdown('''
+        From the figure above can observe that the Tweets posted during the pandemic have more negative Tweets and lesser positive Tweets compares to the Tweets posted before the pandemic. Before the pandemic, around 60% to 70% of the Tweets in each month usually are predicted as negative sentiment. 
+        Ever since the first Malaysian Movement Control Order (MCO), the number of Tweets got predicted as negative increased by 10%. 
 
-    Dash supports [Markdown](http://commonmark.org/help).
+        Below lists down the events that affected sentiment changes significantly:
 
-    test
+        * In May 2020, the phase 4 of MCO was going to finally end after three extensions of MCO. 
+        
+        * In August 2020, Malaysia has implemented mandatory face mask-wearing in public starting from August 2020. Most of the Malaysians financial situation was impacted by COVID-19 pandemic, an extra expense which is purchasing face mask will definitely make their financial situation and mental health worse. In fact, the most frequent words during August 2020 include ‘bad’, ‘tired’, ‘find’, ‘work’, ‘corruption’, and ‘country’. The frequent words of August 2020 implies that Malaysian were struggle with financial problem and concern with politic corruption. 
+        
+        * In September 2021, Malaysia government announced that all the federal government employees are mandatory to be vaccinated. Having a hope that the more population being vaccinated, the more unlikely being infected, Malaysian could be feeling safer.
+        
+        As a conclusion, compared to text data before the pandemic, the text data during pandemic tend to be classified as a negative sentiment. The feeling and mental state often impacted by the important COVID-19 related events that have happened during the pandemic.
 
-    Markdown is a simple way to write and format text.
-    It includes a syntax for things like **bold text** and *italics*,
-    [links](http://commonmark.org/help), inline `code` snippets, lists,
-    quotes, and more.
-    '''
-    ),
-    # dcc.Graph(id='bargraph',
-    #         figure=px.bar(df, barmode='group', x="year_month", y="like"))
+        '''
+        ),
+        body=True, color="success", outline=True,className="mb-3"
+    )
 ])
 
 
