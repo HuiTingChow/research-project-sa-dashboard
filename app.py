@@ -177,7 +177,7 @@ header_node = html.Div(
                 dbc.NavLink("Methodology", href="/methodology", active="exact"),
                 dbc.NavLink("Exploratory Data Analysis", href="/eda", active="exact"),
                 dbc.NavLink("Models Evaluation", href="/models-evaluation", active="exact"),
-                dbc.NavLink("Sentiment Analysis", href="/sentiment-analysis", active="exact"),
+                dbc.NavLink("Changes In Sentiment", href="/sentiment-analysis", active="exact"),
                 dbc.NavLink("LDA Topic Model", href="/lda", active="exact"),
             ],
             pills=True, fill=True

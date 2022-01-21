@@ -30,22 +30,45 @@ layout = html.Div([
     html.H1('Overview',
             style={'textAlign':'center'}),
     html.Hr(),
+    html.P(
+        children="An overview about the research.",
+        style={'textAlign': 'center'},
+        className="lead"
+    ),
     dbc.Card(
         dcc.Markdown('''
-        From the figure above can observe that the Tweets posted during the pandemic have more negative Tweets and lesser positive Tweets compares to the Tweets posted before the pandemic. Before the pandemic, around 60% to 70% of the Tweets in each month usually are predicted as negative sentiment. 
-        Ever since the first Malaysian Movement Control Order (MCO), the number of Tweets got predicted as negative increased by 10%. 
+        #### Introduction
 
-        Below lists down the events that affected sentiment changes significantly:
+        The COVID-19 pandemic has been affecting Malaysians daily life and is slowing down the global economy. 
+        This research investigates changes in the mental health status of Malaysian using sentiment analysis. 
+        Related Tweets are collected for analysing. 
+        This research compares the supervised machine learning technique and unsupervised machine learning technique to find a suitable model to classify the polarity of collected Tweets. 
+        A portion of collected Tweets was manually labelled to train the supervised machine learning model. 
+        The results show that the VADER classifier outperformed the other classifiers with an 89% accuracy 
+        where the Linear Support Vector Machine classifier achieved 65% accuracy and 
+        the Multinomial Naïve Bayes classifier achieved 61% accuracy. 
+        The VADER classifier was selected to classify the sentiment of the remaining Tweets. 
+        The sentiment classified Tweets were analysed using various techniques including Time series analysis, Word Cloud, and LDA. 
+        The result indicates that Tweets posted during the pandemic have more change to be classified as 
+        negative sentiment compared to the Tweets posted before the pandemic. 
+        The findings of this research suggest that Malaysian mental health is highly impacted 
+        by the COVID-19 pandemic and political crisis in Malaysia.  
+        '''
+        ),
+        body=True, color="success", outline=True,className="mb-3"
+    ),
+    dbc.Card(
+        dcc.Markdown('''
+        #### About this dashboard
 
-        * In May 2020, the phase 4 of MCO was going to finally end after three extensions of MCO. 
-        
-        * In August 2020, Malaysia has implemented mandatory face mask-wearing in public starting from August 2020. Most of the Malaysians financial situation was impacted by COVID-19 pandemic, an extra expense which is purchasing face mask will definitely make their financial situation and mental health worse. In fact, the most frequent words during August 2020 include ‘bad’, ‘tired’, ‘find’, ‘work’, ‘corruption’, and ‘country’. The frequent words of August 2020 implies that Malaysian were struggle with financial problem and concern with politic corruption. 
-        
-        * In September 2021, Malaysia government announced that all the federal government employees are mandatory to be vaccinated. Having a hope that the more population being vaccinated, the more unlikely being infected, Malaysian could be feeling safer.
-        
-        As a conclusion, compared to text data before the pandemic, the text data during pandemic tend to be classified as a negative sentiment. The feeling and mental state often impacted by the important COVID-19 related events that have happened during the pandemic.
+        This dashboard was developed to give an simple introduction and overview of how the research was conducted and to
+        demonstrate and visualise the results and findings of this research. Below is the content structure of this dashboard:
 
-        ???
+        * Overview - Introduction to this research
+        * Methodology - Briefly describe the system design of the research
+        * Exploratory Data Analysis - Analysis and explore the cleaned dataset
+        * Changes In Sentiment - Compare changes in sentiment before and during the pandemic
+        * LDA Topic Model - Compare the common features in Tweets before and during the pandemic
         '''
         ),
         body=True, color="success", outline=True,className="mb-3"

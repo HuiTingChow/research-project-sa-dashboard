@@ -99,7 +99,7 @@ wc_all = html.Div([
 
 # Layout
 layout = html.Div([
-    html.H2('Changes In Sentiment Before and During the Pandemic',
+    html.H2('Changes In Sentiment',
             style={'textAlign':'center'}),
     html.Hr(),
     html.P(
