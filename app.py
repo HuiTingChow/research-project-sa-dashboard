@@ -239,3 +239,6 @@ if __name__ == '__main__':
 # https://github.com/Coding-with-Adam/Dash-by-Plotly/blob/master/Bootstrap/Side-Bar/side_bar.py
 # https://realpython.com/python-dash/#style-your-dash-application
 # https://community.plotly.com/t/holy-grail-layout-with-dash-bootstrap-components/40818/2
+# https://commonmark.org/help/
+# https://dash-bootstrap-components.opensource.faculty.ai/docs/components/
+# https://dash.plotly.com/basic-callbacks

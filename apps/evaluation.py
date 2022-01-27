@@ -23,6 +23,7 @@ os.chdir(dname)
 # Evaluation metric
 table_header = [
     html.Thead(html.Tr([html.Th("Classifier"),
+                        html.Th("Confusion Matrix"), 
                         html.Th("Accuracy"), 
                         html.Th("Precision"),
                         html.Th("Recall"),
@@ -31,24 +32,27 @@ table_header = [
 ]
 
 row1 = html.Tr([html.Td("MNB"),
-                html.Td("60.59%"), 
-                html.Td("62.63%"), 
-                html.Td("57.82%"),
-                html.Td("60.13%"),
+                html.Td("TN:41  FP:26  FN:24  TP:49"),
+                html.Td("64.29%"), 
+                html.Td("65.33%"), 
+                html.Td("67.12%"),
+                html.Td("66.22%"),
                 html.Td("0.008")])
 
 row2 = html.Tr([html.Td("Linear SVM"),
-                html.Td("65.31%"), 
-                html.Td("62.58%"), 
-                html.Td("73.90%"), 
-                html.Td("67.77%"),
+                html.Td("TN:47  FP:20  FN:27  TP:46"),
+                html.Td("66.43%"), 
+                html.Td("69.70%"), 
+                html.Td("63.01%"), 
+                html.Td("66.19%"),
                 html.Td("0.179")])
 
 row3 = html.Tr([html.Td("VADER"),
-                html.Td("88.97%"), 
-                html.Td("92.37%"), 
-                html.Td("84.95%"), 
-                html.Td("84.95%"),
+                html.Td("TN:63  FP:4  FN:11  TP:62"),
+                html.Td("89.29%"), 
+                html.Td("93.94%"), 
+                html.Td("84.93%"), 
+                html.Td("89.21%"),
                 html.Td("0.540")])
 
 table_body = [html.Tbody([row1, row2, row3])]
